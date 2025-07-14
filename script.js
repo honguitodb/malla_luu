@@ -168,6 +168,11 @@ function verificarBloqueos() {
     const cumplido = reqs.every(r => aprobados.has(r));
     t.classList.toggle("bloqueado", reqs.length && !cumplido);
   });
+  document.querySelectorAll(".ramo").forEach(t => {
+    const coreqs = t.dataset.corequisitos ? JSON.parse(t.dataset.corequisitos) : [];
+    const cumplido = coreqs.every(r => (aprobados.has(r) || enCurso.has(r)));
+    t.classList.toggle("bloqueado", coreqs.length && !cumplido);
+  });
 }
 
 malla.forEach(({ semestre, etapa, ramos }) => crearTarjeta(semestre, etapa, ramos));
