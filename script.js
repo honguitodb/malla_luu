@@ -16,8 +16,8 @@ const malla = [
     etapa: "plancomun",
     ramos: [
       { nombre: "Cálculo 2", requisitos: ["Cálculo 1"] },
-      { nombre: "Laboratorio dinámica", requisitos: ["Cálculo 1"] },
-      { nombre: "Dinámica", requisitos: ["Cálculo 1"] },
+      { nombre: "Laboratorio dinámica", requisitos: ["Cálculo 1"], corequisitos: ["Álgebra lineal"] },
+      { nombre: "Dinámica", requisitos: ["Cálculo 1"],corequisitos: ["Álgebra lineal", "Laboratorio dinámica"] },
       { nombre: "Introducción a la programación"},
       { nombre: "Exploratorio de major"},
       { nombre: "Teológico"}
@@ -49,7 +49,7 @@ const malla = [
     etapa: "plancomun",
     ramos: [
       { nombre: "Probabilidades y estadística", requisitos: ["Cálculo 2"] },
-      { nombre: "Introducción a la economía"},
+      { nombre: "Introducción a la economía", rquisitos: ["Cálculo 2"]},
       { nombre: "Electricidad y magnetismo", requisitos: ["Cálculo 3"] },
       { nombre: "Laboratorio electricidad y magnetismo", requisitos: ["Cálculo 3"] },
       { nombre: "Major", requisitos: ["Práctica 1"] },
