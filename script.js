@@ -49,7 +49,7 @@ const malla = [
     etapa: "plancomun",
     ramos: [
       { nombre: "Probabilidades y estadística", requisitos: ["Cálculo 2"] },
-      { nombre: "Introducción a la economía", rquisitos: ["Cálculo 2"]},
+      { nombre: "Introducción a la economía", requisitos: ["Cálculo 2"]},
       { nombre: "Electricidad y magnetismo", requisitos: ["Cálculo 3"] },
       { nombre: "Laboratorio electricidad y magnetismo", requisitos: ["Cálculo 3"] },
       { nombre: "Major", requisitos: ["Práctica 1"] },
@@ -121,6 +121,7 @@ function crearTarjeta(semestre, etapa, ramos) {
     const tarjeta = document.createElement("div");
     tarjeta.className = `ramo pendiente ${etapa}`;
     tarjeta.textContent = ramo.nombre;
+    if (ramo.corequisitos) tarjeta.dataset.corequisitos = JSON.stringify(ramo.corequisitos);
     if (ramo.requisitos) tarjeta.dataset.requisitos = JSON.stringify(ramo.requisitos);
     tarjeta.onclick = () => cambiarEstado(tarjeta);
     bloque.appendChild(tarjeta);
@@ -161,17 +162,18 @@ function cargarEstado() {
 
 function verificarBloqueos() {
   const aprobados = new Set();
+  const enCurso = new Set();
+  document.querySelectorAll(".ramo.encurso").forEach(t => enCurso.add(t.textContent.replace('🔒','').trim()));
   document.querySelectorAll(".ramo.aprobado").forEach(t => aprobados.add(t.textContent.replace('🔒','').trim()));
 
   document.querySelectorAll(".ramo").forEach(t => {
     const reqs = t.dataset.requisitos ? JSON.parse(t.dataset.requisitos) : [];
     const cumplido = reqs.every(r => aprobados.has(r));
-    t.classList.toggle("bloqueado", reqs.length && !cumplido);
-  });
-  document.querySelectorAll(".ramo").forEach(t => {
+    
     const coreqs = t.dataset.corequisitos ? JSON.parse(t.dataset.corequisitos) : [];
-    const cumplido = coreqs.every(r => (aprobados.has(r) || enCurso.has(r)));
-    t.classList.toggle("bloqueado", coreqs.length && !cumplido);
+    const cocumplido = coreqs.every(r => (aprobados.has(r) || enCurso.has(r)));
+    
+    t.classList.toggle("bloqueado", !cumplido || !cocumplido);
   });
 }
 
