@@ -37,7 +37,7 @@ const malla = [
     ramos: [
       { nombre: "Cálculo 3", requisitos: ["Cálculo 2", "Álgebra lineal"]},
       { nombre: "Termodinámica", requisitos: ["Cálculo 2", "Química para ingeniería"]},
-      { nombre: "Laboratorio termodinámica", requisitos: ["Cálculo 2", "Química"] },
+      { nombre: "Laboratorio termodinámica", requisitos: ["Cálculo 2", "Química para inegniería"] },
       { nombre: "Biológico" },
       { nombre: "Ecuaciones diferenciales", requisitos: ["Cálculo 2", "Álgebra lineal"] },
       { nombre: "Ecología integral/sustentabilidad" }
