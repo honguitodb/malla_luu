@@ -173,7 +173,7 @@ function verificarBloqueos() {
     const coreqs = t.dataset.corequisitos ? JSON.parse(t.dataset.corequisitos) : [];
     const cocumplido = coreqs.every(r => (aprobados.has(r) || enCurso.has(r)));
     
-    t.classList.toggle("bloqueado", !cumplido || !cocumplido);
+    t.classList.toggle("bloqueado", (reqs.length && !cumplido) || (coreqs.length &&!cocumplido));
   });
 }
 
